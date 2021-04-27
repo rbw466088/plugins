@@ -158,7 +158,7 @@
         var data = {
             list: [
                 {
-                    type: $(target).text()
+                    type: $.trim($(target).text())
                 }
             ]
         };
@@ -262,7 +262,6 @@
             type: 'get',
             url: '/space/moding/get_resource_list',
             success: function(data) {
-                console.log(data)
                 $('#thumbnails').html(data);
             }
         });
@@ -272,6 +271,24 @@
 
     var pickResource = function(target) {
         $(target).find('.thumbnail').toggleClass('selected');
+
+        var title = $.trim($(target).text());
+        var coverStr = $(target).find('.resource-image').css('background-image');
+        var cover = coverStr.slice(5, -2);
+        var data = {
+            list: [
+                {
+                    type: '空间素材',
+                    title: title,
+                    img: cover
+                }
+            ]
+        };
+        var html = template('article-item', data); // eslint-disable-line
+        $('#article-items').append(html);
+        hideActionSheet(createAS, maskCreate);
+
+        tmpSave();
     };
 
     var applyPick = function() {
