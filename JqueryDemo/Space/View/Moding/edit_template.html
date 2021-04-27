@@ -1,0 +1,62 @@
+<script id="article-item" type="text/html">
+    <% for(var i=0; i<list.length; i++) { %>
+    <% var item = list[i]; %>
+    <div class="weui_panel article-item article-item-text" data-type="<%=item.type%>">
+        <div class="weui_panel_hd">
+            <span><%=item.type%></span>
+            <div class="article-item-operator">
+                <ul>
+                    <li>
+                        <a href="javascript:void(0);" onclick="bll.upItem(this)">
+                            <i class="design-icon design-finish"></i>
+                            <span>上移</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" onclick="bll.downItem(this)">
+                            <i class="design-icon design-finish"></i>
+                            <span>下移</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" onclick="bll.deleteItem(this)">
+                            <i class="design-icon design-finish"></i>
+                            <span>删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="weui_panel_bd">
+            <%if(item.type == '文本') {%>
+            <p class="edit-text" onclick="bll.showEditDialog(this)" data-value="<%=item.text%>"><%=item.text || '点击编辑此段文字'%></p>
+            <%} else if(item.type == '图片') {%>
+<a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+                <div class="weui_media_hd">
+                    <img onclick="bll.test(this)" id="id-<%=item.localId.replace('wxLocalResource://', '')%>" class="weui_media_appmsg_thumb edit-image" src="<%=item.localId%>" alt="" data-server-id="<%=item.serverId%>">
+                </div>
+                <div class="weui_media_bd">
+                    <p class="weui_media_desc edit-text" onclick="bll.showEditDialog(this)" data-value="<%=item.text%>"><%=item.text || '点击修改图片描述'%></p>
+                </div>
+            </a>
+            <%} else if(item.type == '标题') {%>
+            <h2 class="edit-text" onclick="bll.showEditDialog(this)" data-value="<%=item.text%>"><%=item.text || '点击修改标题'%></h2>
+            <%} else if(item.type == '引用') {%>
+            <blockquote class="edit-text" onclick="bll.showEditDialog(this)" data-value="<%=item.text%>"><%=item.text || '点击修改引用'%></blockquote>
+            <%} else if(item.type == '分割线') {%>
+            <hr />
+            <%} else if(item.type == '空间素材') {%>
+            <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+                <div class="weui_media_hd">
+                    <img onclick="bll.test(this)" id="id-<%=item.localId.replace('wxLocalResource://', '')%>" class="weui_media_appmsg_thumb edit-image" src="<%=item.img%>" alt="" data-server-id="<%=item.serverId%>">
+                </div>
+                <div class="weui_media_bd">
+                    <p class="weui_media_desc edit-text" onclick="bll.showEditDialog(this)" data-value="<%=item.text%>"><%=item.text || '点击修改图片描述'%></p>
+                </div>
+            </a>
+            <%} %>
+        </div>
+    </div>
+    <%} %>
+</script>

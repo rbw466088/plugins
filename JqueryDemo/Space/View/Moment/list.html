@@ -1,0 +1,101 @@
+<volist name="_list" id="vo">
+    <div class="weui_cell moment_post" onclick="bll.openDetail({$vo.id})">
+        <if condition="$vo.charges gt 0">
+        <i class="moment_charges_flag"></i>
+        </if>
+        <div class="weui_cell_hd">
+            <img src="{$vo.avatar}" onclick="bll.openLink('/room/' + '{$vo.uid}', event)" />
+        </div>
+        <div class="weui_cell_bd">
+            <!-- 人名链接 -->
+            <a class="nickname" href="javascript:void(0);" onclick="bll.openLink('/room/' + '{$vo.uid}', event)">
+                <span>{$vo.nickname}</span>
+            </a>
+            <if condition="$vo.category == 'txt'">
+            <div class="weui_media_box weui_media_text moment_article">
+                <h4 class="weui_media_title">{$vo.title}</h4>
+                <img src="{$vo.img}?imageView2/2/h/200" style="width: 100%">
+                <p class="weui_media_desc">{$vo.desc}</p>
+            </div>
+            <else />
+            <if condition="$vo.category !='txt' && $vo.category !='url' && $vo.title != ''">
+                <div class="moment_text_container">
+                    <h4 class="moment_text_title">{$vo.title}</h4>
+                </div>
+            </if>
+            <notempty name="vo.desc">
+                <!-- 描述 -->
+                <p class="moment_desc">
+                    {$vo.desc}
+                </p>
+            </notempty>
+
+            </if>
+
+            <if condition="$vo.category == 'image'">
+            <!-- 图片 -->
+            <div class="moment_image">
+                <if condition="$vo.charges == 0">
+                <img src="{$vo.img}?imageView2/2/h/200" onclick="bll.openImage('{$vo.img}?imageView2/2/w/720', ['{$vo.img}'], event)">
+                <else />
+                <div class="image_tag moment_tag_image">
+                    <img src="{$vo.img}?imageView2/2/h/200">
+                </div>
+                </if>
+            </div>
+            <elseif condition="$vo.category == 'multi'" />
+            <!-- 多图 -->
+            <div class="moment_image">
+                <div class="image_tag moment_tag_multi">
+                    <img src="{$vo.img}?imageView2/2/h/200" onclick="bll.openImage('', [], event)">
+                </div>
+            </div>
+            <elseif condition="$vo.category == 'url'" />
+            <!-- 链接 -->
+            <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg moment_link">
+                <div class="weui_media_hd">
+                    <i class="link"></i>
+                </div>
+                <div class="weui_media_bd">
+                    <p class="weui_media_desc">{$vo.title}</p>
+                </div>
+            </a>
+            <elseif condition="$vo.category == 'audio'" />
+            <!-- 音频 -->
+            <div class="moment_content">
+                <div class="moment_audio">
+                    <a class="voice" style="width: {$vo['duration'] ? 2 + 6 * $vo['duration'] / 102 : 4}rem;" onclick="bll.playVoice(this, event, '{$vo.url}', '{$vo.id}')">
+                        <i class="voice_gray"></i>
+
+                        <notempty name="vo.duration">
+                            <span class="duration">{$vo.duration}''</span>
+                        </notempty>
+
+                    </a>
+                </div>
+            </div>
+            <elseif condition="$vo.category == 'video'" />
+            <!-- 视频 -->
+            <div class="video">
+                <if condition="$vo.charges == 0">
+                <video src="{$vo.url}" poster="{$vo.img}" controls="controls" preload="metadata" onclick="bll.playVideo(this, event)"></video>
+                <else />
+                <div class="moment_image">
+                    <div class="image_tag moment_tag_video">
+                        <img src="{$vo.img}">
+                    </div>
+                </div>
+                </if>
+            </div>
+            </if>
+
+            <!-- 时间 -->
+			<p class="timestamp">{$vo.createtime|date='Y-m-d H:i',###}
+                <if condition="$vo.cnt_hot gt 0">
+                &nbsp;&nbsp;|&nbsp;&nbsp;浏览{$vo.cnt_hot}次
+                </if>
+            </p>
+		</div>
+	</div>
+</volist>
+<!-- last_id={$last_id} -->

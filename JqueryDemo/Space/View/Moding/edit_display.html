@@ -1,0 +1,96 @@
+<!-- 编辑文本对话框 Start -->
+<div class="weui_dialog_alert edit-text-alert" id="edit-text-dialog" style="display: none;">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog edit-text-dialog">
+        <div class="weui_dialog_hd">
+            <a id="cancelButton" class="dh_cancel" href="javascript:;"><i></i></a>
+            <a id="okButton" class="dh_confirm" href="javascript:;" ><i></i></a>
+            <p class="weui_dialog_title">编辑文字</p>
+        </div>
+        <div class="weui_dialog_bd">
+            <textarea id="edit-text-textarea" oninput="bll.textChange(this.value)" class="weui_textarea" rows="3"></textarea>
+            <div class="weui_textarea_counter">
+                <span id="text-length">0</span>/500
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 编辑文本对话框 End -->
+
+<!-- confirm Start -->
+<div class="weui_dialog_confirm" id="confirmDialog" style="display: none;">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+        <div class="weui_dialog_hd"><strong class="weui_dialog_title" id="confirmTitle"></strong></div>
+        <div class="weui_dialog_bd" id="confirmContent"></div>
+        <div class="weui_dialog_ft">
+            <a href="javascript:;" class="weui_btn_dialog default" id="confirmCancel">取消</a>
+            <a href="javascript:;" class="weui_btn_dialog primary" id="confirmOk">确定</a>
+        </div>
+    </div>
+</div>
+<!-- confirm End -->
+
+<!-- 新建 Start -->
+<div>
+    <div class="weui_mask_transition" id="maskCreate" style="display: none;"></div>
+    <div class="weui_actionsheet" id="createAS">
+        <div class="weui_actionsheet_menu">
+            <div class="weui_actionsheet_cell" onclick="bll.addItem(this)">文本</div>
+            <div class="weui_actionsheet_cell" onclick="bll.chooseImage()">图片</div>
+            <div class="weui_actionsheet_cell" onclick="bll.addItem(this)">标题</div>
+            <div class="weui_actionsheet_cell" onclick="bll.addItem(this)">引用</div>
+            <div class="weui_actionsheet_cell" onclick="bll.addItem(this)">分割线</div>
+            <div class="weui_actionsheet_cell" onclick="bll.showPick()">空间素材</div>
+        </div>
+        <div class="weui_actionsheet_action">
+            <div class="weui_actionsheet_cell" id="cancelCreateAS">取消</div>
+        </div>
+    </div>
+</div>
+<!-- 新建 End -->
+
+<!-- 白噪音 Start -->
+<div style="position:absolute;top:0;left:0;width:0;height:0;">
+    <audio id="whiteNoisePlayer" style="width: 0px; height: 0px;" preload="metadata" src="" loop="loop">
+    </audio>
+</div>
+<div>
+    <div class="weui_mask_transition" id="maskWhiteNoise" style="display: none;"></div>
+    <div class="weui_actionsheet" id="whiteNoiseAS">
+        <div class="weui_actionsheet_menu">
+            <div class="weui_actionsheet_cell" onclick="bll.playWhiteNoise('birds.mp3')">鸟叫</div>
+            <div class="weui_actionsheet_cell" onclick="bll.playWhiteNoise('coffer.mp3')">咖啡厅</div>
+            <div class="weui_actionsheet_cell" onclick="bll.playWhiteNoise('rain.m4a')">雨声</div>
+            <div class="weui_actionsheet_cell" onclick="bll.playWhiteNoise('wind.mp3')">风声</div>
+            <div class="weui_actionsheet_cell" onclick="bll.playWhiteNoise('waterfall.mp3')">瀑布</div>
+            <div class="weui_actionsheet_cell" onclick="bll.stopWhiteNoise()">关闭白噪音</div>
+        </div>
+        <div class="weui_actionsheet_action">
+            <div class="weui_actionsheet_cell" id="cancelWhiteNoiseAS">取消</div>
+        </div>
+    </div>
+</div>
+<!-- 白噪音 End -->
+
+<!-- toast Start -->
+<div id="toast" style="display: none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+        <i class="weui_icon_toast"></i>
+        <p class="weui_toast_content" id="toast-content">已完成</p>
+    </div>
+</div>
+<!-- toast End -->
+
+<!-- hidden Input Start -->
+<input type="hidden" id="draft-id" value="{$info.id}">
+<!-- hidden Input End -->
+
+<!-- server data Start -->
+<notempty name="info.content">
+<script>
+ var editContent = {$info.content};
+</script>
+</notempty>
+<!-- server data End -->
