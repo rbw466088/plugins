@@ -1,0 +1,12 @@
+<volist name="_list" id="vo">
+<li onclick="bll.pickResource(this)" _id="{$vo.id}">
+    <div class="thumbnail">
+        <div class="resource-image" style="background-image:url({$vo.img})">
+            <if condition="$vo.category == 'video'">
+                <div class="resource-video"></div>
+            </if>
+        </div>
+        <p>{$vo.title}</p>
+    </div>
+</li>
+</volist>

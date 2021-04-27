@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>创作中心</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <link href="http://cdn.myline.cc/nanqi/weui/0.4.3/weui.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/moding/center.less?1" rel="stylesheet"/>
+    </head>
+    <body>
+        <include file="edit_display" />
+        <div class="hd">
+            <h1 class="page-title">创作中心</h1>
+            <a href="/space/moding/edit" class="weui_btn weui_btn_plain_primary start">开始创作</a>
+        </div>
+        <div class="bd">
+            <notempty name="draft">
+                <div class="weui_panel weui_panel_access">
+                    <div class="weui_panel_hd">我的草稿</div>
+                    <div class="weui_panel_bd">
+                        <div class="weui_media_box weui_media_small_appmsg">
+                            <div class="weui_cells weui_cells_access">
+                                <volist name="draft" id="vo" offset="0" length="2">
+                                    <a class="weui_cell" href="/space/moding/edit?draft_id={$vo.id}">
+                                        <div class="weui_cell_bd weui_cell_primary">
+                                            <empty name="vo.title">
+                                                <p class="empty-title">[暂无标题]</p>
+                                                <else />
+                                                <p>{$vo.title}</p>
+                                            </empty>
+                                        </div>
+                                        <div class="weui_cell_ft">{$vo.last_update_time|date='m月d日',###}</div>
+                                    </a>
+                                </volist>
+                            </div>
+                        </div>
+                    </div>
+                    <if condition="count($draft) gt 2">
+                        <a class="weui_panel_ft more-draft" href="javascript:void(0);">查看更多</a>
+                    </if>
+                </div>
+            </notempty>
+
+            <notempty name="publish">
+                <div class="weui_panel weui_panel_access">
+                    <div class="weui_panel_hd">我的创作</div>
+                    <div class="weui_panel_bd">
+                        <volist name="publish" id="vo" offset="0" length="10">
+                        <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg" onclick="bll.openDetailReview()">
+                            <div class="weui_media_bd">
+                                <h4 class="weui_media_title">{$vo.title}</h4>
+                                <p class="weui_media_desc">{$vo.desc}</p>
+                            </div>
+                            <notempty name="vo.img">
+                            <div class="weui_media_hd">
+                                <img class="weui_media_appmsg_thumb" src="{$vo.img}" alt="{$vo.title}">
+                            </div>
+                            </notempty>
+                        </a>
+                        </volist>
+                    </div>
+                    <if condition="count($publish) gt 10">
+                    <a class="weui_panel_ft" href="javascript:void(0);">查看更多</a>
+                    </if>
+                </div>
+            </notempty>
+        </div>
+        <script src="http://cdn.myline.cc//nanqi/zepto/1.0/zepto.min.js"></script>
+        <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        <script src="../../js/moding/center.es?1"></script>
+        <script>
+         wx.config({
+             debug: false,
+             appId: '{$package["appid"]}',
+             nonceStr: '{$package["nonceStr"]}',
+             signature: '{$package["signature"]}',
+             jsApiList: [
+                 'hideOptionMenu',
+                 'showOptionMenu',
+                 'hideMenuItems',
+                 'onMenuShareTimeline',
+                 'onMenuShareAppMessage',
+                 'onMenuShareQQ',
+                 'onMenuShareWeibo',
+                 'onMenuShareQZone',
+                 'closeWindow',
+                 'showMenuItems',
+                 'chooseImage',
+                 'uploadImage',
+                 'previewImage'
+             ]
+         });
+        </script>
+
+        <script>
+         // .container 设置了 overflow 属性, 导致 Android 手机下输入框获取焦点时, 输入法挡住输入框的 bug
+         // 相关 issue: https://github.com/weui/weui/issues/15
+         // 解决方法:
+         // 0. .container 去掉 overflow 属性, 但此 demo 下会引发别的问题
+         // 1. 参考 http://stackoverflow.com/questions/23757345/android-does-not-correctly-scroll-on-input-focus-if-not-body-element
+         //    Android 手机下, input 或 textarea 元素聚焦时, 主动滚一把
+         if (/Android/gi.test(navigator.userAgent)) {
+             window.addEventListener('resize', function () {
+                 if (document.activeElement.tagName == 'INPUT' || document.activeElement.tagName == 'TEXTAREA') {
+                     window.setTimeout(function () {
+                         document.activeElement.scrollIntoViewIfNeeded();
+                     }, 0);
+                 }
+             })
+         }
+        </script>
+    </body>
+</html>
