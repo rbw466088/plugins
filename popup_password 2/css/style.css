@@ -1,0 +1,120 @@
+body,
+html {
+	overflow: hidden;
+	height: 100% !important;
+	background-color: transparent;
+}
+
+.title_bar {
+	height: 60px;
+	background-color: white;
+	position: relative;
+	border-bottom: 1px solid #E9511D;
+	border-radius: 5px 5px 0 0;
+}
+
+.cancel_btn {
+	z-index: 999;
+	height: 39px;
+	width: 40px;
+	padding: 0 !important;
+	background-image: url(../../images/icon-x.png);
+	background-size: 30% 30%;
+	background-position: center;
+	background-repeat: no-repeat;
+	border: 0;
+}
+
+#title_info {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	line-height: 60px;
+	height: 60px;
+	top: 0;
+	color: #5a5a5a;
+}
+
+#password_div {
+	background-color: transparent;
+	width: 242px;
+	border: 1px solid #B0B0B0;
+	border-radius: 0;
+}
+
+#password_div div {
+	line-height: 42px;
+	height: 40px;
+	float: left;
+	width: 40px;
+	border-right: 1px solid #d4d4d4;
+}
+
+#password_div div.active {
+	background-image: url(../../images/selection.gif);
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#password_div div b {
+	margin: 5px auto;
+	width: 7px;
+	height: 17px;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+#password_div div.hasValue b {
+	margin: 0 auto;
+	width: 7px;
+	height: 7px;
+	overflow: hidden;
+	visibility: visible;
+}
+
+#password_div div:last-child {
+	border-right: 0;
+}
+
+#hidden_password {
+	bottom: 16px;
+	left: -100px;
+	height: 52px;
+	position: absolute;
+	width: 400px;
+	opacity: 0;
+}
+
+.keyboard {
+	width: 100%;
+	background-color: #D5D8DB;
+	position: absolute;
+	bottom: 0;
+}
+
+.key {
+	padding: 0;
+	margin-left: 1px;
+	margin-top: 0.5px;
+	margin-bottom: 0.5px;
+}
+
+.key li {
+	font-size: 1.3em;
+	float: left;
+	width: 33.02%;
+	height: 2.5em;
+	line-height: 2.5;
+	background: white;
+	text-align: center;
+	color: #111;
+	display: inline-block;
+	margin-right: 1px;
+	margin-bottom: 1px;
+	cursor: pointer;
+	list-style-type: none;
+}
+
+.hasMsg {
+	height: 158px !important;
+}
