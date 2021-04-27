@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>手风琴效果</title>
+        <style>
+        	.menu_list{
+        		width: 200px;
+        	}
+        	.menu_head{
+        		padding: 5px 10px;
+        		cursor: pointer;
+        		position: relative;
+        		margin: 1px;
+        		font-weight: bold;
+        		background: #eef4d3 url(left.png) center right no-repeat;
+        	}
+        	.menu_body{
+        		display: none;
+        	}
+        	.menu_body a{
+        		display: block;
+        		color: #006699;
+        		background-color: #efefef;
+        		padding-left: 10px;
+        		font-weight: bold;
+        		text-decoration: none;
+        	}
+        	.menu_body a:hover{
+        		color: #000;
+        		text-decoration: none;
+        	}
+        </style>
+    </head>
+    <body>
+        <div class="menu_list" id="firstpane">
+            <p class="menu_head">
+                Header-1
+            </p>
+            <div class="menu_body">
+                <a href="#">
+                    Link-1
+                </a>
+                <a href="#">
+                    Link-2
+                </a>
+                <a href="#">
+                    Link-3
+                </a>
+            </div>
+            <p class="menu_head">
+                Header-2
+            </p>
+            <div class="menu_body">
+                <a href="#">
+                    Link-1
+                </a>
+                <a href="#">
+                    Link-2
+                </a>
+                <a href="#">
+                    Link-3
+                </a>
+            </div>
+            <p class="menu_head">
+                Header-3
+            </p>
+            <div class="menu_body">
+                <a href="#">
+                    Link-1
+                </a>
+                <a href="#">
+                    Link-2
+                </a>
+                <a href="#">
+                    Link-3
+                </a>
+            </div>
+        </div>
+
+		<hr />
+
+        <div class="menu_list" id="secondpane">
+			<p class="menu_head" style="background-image: url(down.png);">
+				Header-1
+			</p>
+			<div class="menu_body" style="display: block; background-image: url(left.png);">
+				<a>Link-1</a>
+	         	<a>Link-2</a>
+	         	<a>Link-3</a>	
+			</div>
+			<p class="menu_head" style="background-image: url(left.png);">
+				Header-2
+			</p>
+			<div class="menu_body" style="background-image: url(left.png);">
+				<a>Link-1</a>
+	         	<a>Link-2</a>
+	         	<a>Link-3</a>
+			</div>
+			<p class="menu_head" style="background-image: url(left.png);">
+				Header-3
+			</p>
+			<div class="menu_body" style="background-image: url(left.png);">
+	        	<a>Link-1</a>
+	         	<a>Link-2</a>
+	         	<a>Link-3</a>			
+	       </div>
+	  </div>
+        <script src="jquery-3.1.0.js"></script>
+        <script>
+        	$(function () {
+        		$('#firstpane p.menu_head').click(function () {
+	        		$(this).css('backgroundImage', 'url(down.png)').next('div.menu_body').slideToggle(300).sibling("div.menu_body").slideUp('slow');
+	        		$(this).siblings().css('backgroundImage', 'url(left.png)');
+	        	});
+
+	        	$('#secondpane p.menu_head').mouseover(function () {
+	        		$(this).css("backgroundImage", "url(down.png)").next('div.menu_body').slideToggle(500).sibling("div.menu_body").slideUp('slow');
+	        		$(this).siblings().css('backgroundImage', 'url(left.png)');
+	        	});
+        	});
+        </script>
+    </body>
+</html>
